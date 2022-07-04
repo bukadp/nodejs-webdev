@@ -1,11 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const createPath = require('./helpers/create-path')
-
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 const postRoutes = require('./routes/post-routes');
-const contactRoutes = require('./routes/contact-routes')
+const postApiRoutes = require('./routes/api-post-routes');
+const contactRoutes = require('./routes/contact-routes');
+const createPath = require('./helpers/create-path');
 
 const app = express();
 const PORT = 3000;
@@ -43,6 +43,7 @@ app.get('/kontacts', (req, res) => {
 
 app.use(postRoutes);
 app.use(contactRoutes);
+app.use(postApiRoutes);
 
 app.use((req, res) => {
     const title = 'Error page'
