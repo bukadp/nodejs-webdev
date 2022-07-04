@@ -6,13 +6,12 @@ const postRoutes = require('./routes/post-routes');
 const postApiRoutes = require('./routes/api-post-routes');
 const contactRoutes = require('./routes/contact-routes');
 const createPath = require('./helpers/create-path');
+require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
-const db = 'mongodb+srv://buka:470197@cluster0.onqjxcd.mongodb.net/node-blog?retryWrites=true&w=majority'
 
 mongoose
-    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((res) => console.log('Connected to DB'))
     .catch((error) => console.log(error));
 
@@ -20,8 +19,8 @@ app.set('view engine', 'ejs');
 
 
 
-app.listen(PORT, (error) => {
-    error ? console.log(error) : console.log(`listening on port ${PORT}`);
+app.listen(process.env.PORT, (error) => {
+    error ? console.log(error) : console.log(`listening on port ${process.env.PORT}`);
 });
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
